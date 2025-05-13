@@ -160,17 +160,21 @@
 
   <script>
     function nextStep(currentStep) {
-      document.getElementById(step${currentStep}).classList.remove("active");
-      document.getElementById(step${currentStep + 1}).classList.add("active");
+      const current = document.getElementById(step${currentStep});
+      const next = document.getElementById(step${currentStep + 1});
+      if (current && next) {
+        current.classList.remove("active");
+        next.classList.add("active");
 
-      document.getElementById(stepCircle${currentStep}).classList.remove("active");
-      document.getElementById(stepCircle${currentStep}).classList.add("done");
-      document.getElementById(stepCircle${currentStep + 1}).classList.add("active");
+        document.getElementById(stepCircle${currentStep}).classList.remove("active");
+        document.getElementById(stepCircle${currentStep}).classList.add("done");
+        document.getElementById(stepCircle${currentStep + 1}).classList.add("active");
 
-      const progressText = document.getElementById("progressText");
-      if (currentStep === 1) progressText.innerText = "ලියාපදිංචිය 50% සම්පුර්ණයි";
-      if (currentStep === 2) progressText.innerText = "ලියාපදිංචිය 75% සම්පුර්ණයි";
-      if (currentStep === 3) progressText.innerText = "ලියාපදිංචිය 100% සම්පුර්ණයි";
+        const progressText = document.getElementById("progressText");
+        if (currentStep === 1) progressText.innerText = "ලියාපදිංචිය 50% සම්පුර්ණයි";
+        if (currentStep === 2) progressText.innerText = "ලියාපදිංචිය 75% සම්පුර්ණයි";
+        if (currentStep === 3) progressText.innerText = "ලියාපදිංචිය 100% සම්පුර්ණයි";
+      }
     }
 
     function submitForm() {

@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="si">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ලියාපදිංචි පෝරමය</title>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("RZCuI-F4y2ZT0wMjM"); // ඔබේ EmailJS Public Key එක මෙතැන දාන්න
-    })();
-  </script>
   <style>
-    /* original styles remain unchanged */
     body {
       margin: 0;
       font-family: "Noto Sans Sinhala", sans-serif;
@@ -96,6 +89,7 @@
   </style>
 </head>
 <body>
+
   <form id="registerForm">
     <div class="container">
       <div class="header">පොදුගැළිමෝ තොරතුරු</div>
@@ -109,114 +103,107 @@
         <div class="step" id="stepCircle4">4</div>
       </div>
 
-      <!-- Step 1 -->
-      <div class="form-step active" id="step1">
-        <label>මුල් නම</label>
-        <input type="text" name="first_name" placeholder="මුල් නම">
-        <label>අවසන් නම</label>
-        <input type="text" name="last_name" placeholder="අවසන් නම">
-        <label>උපන්දිනය*</label>
-        <input type="date" name="dob">
-        <label>හැඳුනුම්පත් අංකය*</label>
-        <input type="text" name="nic" placeholder="123456789V">
-        <label>විවාහක / අවිවාහක තත්වය*</label>
-        <select name="marital_status">
-          <option value="">තෝරන්න</option>
-          <option>විවාහක</option>
-          <option>අවිවාහක</option>
-        </select>
-        <button class="btn" type="button" onclick="nextStep(1)">ඊළඟ</button>
-      </div>
+      <!-- Steps -->
+      <div id="stepsWrapper">
+        <div class="form-step active" id="step1">
+          <label>මුල් නම</label>
+          <input type="text" name="first_name">
+          <label>අවසන් නම</label>
+          <input type="text" name="last_name">
+          <label>උපන්දිනය*</label>
+          <input type="date" name="dob">
+          <label>හැඳුනුම්පත් අංකය*</label>
+          <input type="text" name="nic">
+          <label>විවාහක / අවිවාහක තත්වය*</label>
+          <select name="marital_status">
+            <option value="">තෝරන්න</option>
+            <option>විවාහක</option>
+            <option>අවිවාහක</option>
+          </select>
+          <button type="button" class="btn" onclick="nextStep()">ඊළඟ</button>
+        </div>
 
-      <!-- Step 2 -->
-      <div class="form-step" id="step2">
-        <label>ඇපකරුවා 1 - නම</label>
-        <input type="text" name="guarantor1_name" placeholder="ඇපකරුවාගේ නම">
-        <label>ඇපකරුවා 1 - දුරකථන අංකය</label>
-        <input type="tel" name="guarantor1_phone" placeholder="0712345678">
-        <label>ඇපකරුවා 2 - නම</label>
-        <input type="text" name="guarantor2_name" placeholder="ඇපකරුවාගේ නම">
-        <label>ඇපකරුවා 2 - දුරකථන අංකය</label>
-        <input type="tel" name="guarantor2_phone" placeholder="0771234567">
-        <button class="btn" type="button" onclick="prevStep(2)">ආපස්සට</button>
-        <button class="btn" type="button" onclick="nextStep(2)">ඊළඟ</button>
-      </div>
+        <div class="form-step" id="step2">
+          <label>ඇපකරුවා 1 - නම</label>
+          <input type="text" name="guarantor1_name">
+          <label>ඇපකරුවා 1 - දුරකථන අංකය</label>
+          <input type="tel" name="guarantor1_phone">
+          <label>ඇපකරුවා 2 - නම</label>
+          <input type="text" name="guarantor2_name">
+          <label>ඇපකරුවා 2 - දුරකථන අංකය</label>
+          <input type="tel" name="guarantor2_phone">
+          <button type="button" class="btn" onclick="prevStep()">ආපස්සට</button>
+          <button type="button" class="btn" onclick="nextStep()">ඊළඟ</button>
+        </div>
 
-      <!-- Step 3 -->
-      <div class="form-step" id="step3">
-        <label>ජා.හැ.ප. ඉදිරිපස (Front)</label>
-        <input type="file" name="nic_front" accept="image/*">
-        <label>ජා.හැ.ප. පිටුපස (Back)</label>
-        <input type="file" name="nic_back" accept="image/*">
-        <label>Selfie (මුහුණ)</label>
-        <input type="file" name="selfie" accept="image/*">
-        <button class="btn" type="button" onclick="prevStep(3)">ආපස්සට</button>
-        <button class="btn" type="button" onclick="nextStep(3)">ඊළඟ</button>
-      </div>
+        <div class="form-step" id="step3">
+          <label>ජා.හැ.ප. ඉදිරිපස</label>
+          <input type="file" name="nic_front" accept="image/*">
+          <label>ජා.හැ.ප. පිටුපස</label>
+          <input type="file" name="nic_back" accept="image/*">
+          <label>Selfie</label>
+          <input type="file" name="selfie" accept="image/*">
+          <button type="button" class="btn" onclick="prevStep()">ආපස්සට</button>
+          <button type="button" class="btn" onclick="nextStep()">ඊළඟ</button>
+        </div>
 
-      <!-- Step 4 -->
-      <div class="form-step" id="step4">
-        <label>ගිණුම් හිමියාගේ නම</label>
-        <input type="text" name="account_holder" placeholder="නම">
-        <label>ගිණුම් අංකය</label>
-        <input type="text" name="account_number" placeholder="123456789012">
-        <label>අයත් බැංකුව</label>
-        <input type="text" name="bank" placeholder="බැංකුවේ නම">
-        <label>ශාඛාව</label>
-        <input type="text" name="branch" placeholder="ශාඛාව">
-        <button class="btn" type="button" onclick="prevStep(4)">ආපස්සට</button>
-        <button class="btn" type="submit">අවසන් කරන්න</button>
-        <p style="margin-top:20px; font-size:14px;">ගැටළුවක් ඇත්නම්: <strong>0712345678</strong> අමතන්න</p>
+        <div class="form-step" id="step4">
+          <label>ගිණුම් හිමියාගේ නම</label>
+          <input type="text" name="account_holder">
+          <label>ගිණුම් අංකය</label>
+          <input type="text" name="account_number">
+          <label>අයත් බැංකුව</label>
+          <input type="text" name="bank">
+          <label>ශාඛාව</label>
+          <input type="text" name="branch">
+          <button type="button" class="btn" onclick="prevStep()">ආපස්සට</button>
+          <button type="submit" class="btn">අවසන් කරන්න</button>
+          <p style="margin-top:20px; font-size:14px;">ගැටළුවක් ඇත්නම්: <strong>0712345678</strong> අමතන්න</p>
+        </div>
       </div>
     </div>
   </form>
 
   <script>
-    function nextStep(currentStep) {
-      const current = document.getElementById(step${currentStep});
-      const next = document.getElementById(step${currentStep + 1});
-      if (current && next) {
-        current.classList.remove("active");
-        next.classList.add("active");
+    let currentStep = 1;
+    const totalSteps = 4;
 
-        document.getElementById(stepCircle${currentStep}).classList.remove("active");
-        document.getElementById(stepCircle${currentStep}).classList.add("done");
-        document.getElementById(stepCircle${currentStep + 1}).classList.add("active");
+    function showStep(step) {
+      for (let i = 1; i <= totalSteps; i++) {
+        document.getElementById(step${i}).classList.remove('active');
+        document.getElementById(stepCircle${i}).classList.remove('active', 'done');
+        if (i < step) {
+          document.getElementById(stepCircle${i}).classList.add('done');
+        }
+      }
+      document.getElementById(step${step}).classList.add('active');
+      document.getElementById(stepCircle${step}).classList.add('active');
 
-        const progressText = document.getElementById("progressText");
-        if (currentStep === 1) progressText.innerText = "ලියාපදිංචිය 50% සම්පුර්ණයි";
-        if (currentStep === 2) progressText.innerText = "ලියාපදිංචිය 75% සම්පුර්ණයි";
-        if (currentStep === 3) progressText.innerText = "ලියාපදිංචිය 100% සම්පුර්ණයි";
+      const progressText = document.getElementById("progressText");
+      const percentage = step * 25;
+      progressText.innerText = ලියාපදිංචිය ${percentage}% සම්පුර්ණයි;
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        showStep(currentStep);
       }
     }
 
-    function prevStep(currentStep) {
-      const current = document.getElementById(step${currentStep});
-      const prev = document.getElementById(step${currentStep - 1});
-      if (current && prev) {
-        current.classList.remove("active");
-        prev.classList.add("active");
-
-        document.getElementById(stepCircle${currentStep}).classList.remove("active");
-        document.getElementById(stepCircle${currentStep - 1}).classList.remove("done");
-        document.getElementById(stepCircle${currentStep - 1}).classList.add("active");
-
-        const progressText = document.getElementById("progressText");
-        if (currentStep === 2) progressText.innerText = "ලියාපදිංචිය 25% සම්පුර්ණයි";
-        if (currentStep === 3) progressText.innerText = "ලියාපදිංචිය 50% සම්පුර්ණයි";
-        if (currentStep === 4) progressText.innerText = "ලියාපදිංචිය 75% සම්පුර්ණයි";
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
       }
     }
 
     document.getElementById("registerForm").addEventListener("submit", function(e){
       e.preventDefault();
-      emailjs.sendForm('service_cxbd60p', 'template_wwveh4d', this)
-        .then(() => {
-          alert("ඔබගේ විස්තර සාර්ථකව යවන්න ලදී!");
-          this.reset(); // පෝරමය clear කරන්න
-        }, (error) => {
-          alert("දෝෂයකි: " + JSON.stringify(error));
-        });
+      alert("ඔබගේ විස්තර සාර්ථකව යවන්න ලදී!");
+      this.reset();
+      currentStep = 1;
+      showStep(currentStep);
     });
   </script>
 </body>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ලියාපදිංචි පෝරමය</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Noto Sans Sinhala", sans-serif;
+      background: #fff;
+    }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+    }
+    .header {
+      text-align: right;
+      font-weight: bold;
+      color: #003366;
+      font-size: 18px;
+    }
+    .progress-bar span {
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .steps {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0 20px;
+    }
+    .step {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #fff;
+    }
+    .step.active {
+      background: #00b894;
+    }
+    .step.done {
+      background: #00cec9;
+    }
+    .form-step {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .form-step.active {
+      display: flex;
+    }
+    label {
+      font-size: 14px;
+    }
+    input, select {
+      padding: 10px;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      font-size: 16px;
+      outline: none;
+    }
+    input:focus, select:focus {
+      border-color: #00b894;
+    }
+    .btn {
+      background: #00b894;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    .btn:disabled {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">පොදුගැළිමෝ තොරතුරු</div>
+    <div class="progress-bar">
+      <span id="progressText">ලියාපදිංචිය 25% සම්පුර්ණයි</span>
+    </div>
+    <div class="steps">
+      <div class="step active" id="stepCircle1">1</div>
+      <div class="step" id="stepCircle2">2</div>
+      <div class="step" id="stepCircle3">3</div>
+      <div class="step" id="stepCircle4">4</div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="form-step active" id="step1">
+      <label>මුල් නම</label>
+      <input type="text" placeholder="මුල් නම">
+      <label>අවසන් නම</label>
+      <input type="text" placeholder="අවසන් නම">
+      <label>උපන්දිනය*</label>
+      <input type="date">
+      <label>හැඳුනුම්පත් අංකය*</label>
+      <input type="text" placeholder="123456789V">
+      <label>විවාහක / අවිවාහක තත්වය*</label>
+      <select>
+        <option value="">තෝරන්න</option>
+        <option>විවාහක</option>
+        <option>අවිවාහක</option>
+      </select>
+      <button class="btn" onclick="nextStep(1)">ඊළඟ</button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="form-step" id="step2">
+      <label>ඇපකරුවා 1 - නම</label>
+      <input type="text" placeholder="ඇපකරුවාගේ නම">
+      <label>ඇපකරුවා 1 - දුරකථන අංකය</label>
+      <input type="tel" placeholder="0712345678">
+      <label>ඇපකරුවා 2 - නම</label>
+      <input type="text" placeholder="ඇපකරුවාගේ නම">
+      <label>ඇපකරුවා 2 - දුරකථන අංකය</label>
+      <input type="tel" placeholder="0771234567">
+      <button class="btn" onclick="prevStep(2)">ආපස්සට</button>
+      <button class="btn" onclick="nextStep(2)">ඊළඟ</button>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="form-step" id="step3">
+      <label>ජා.හැ.ප. ඉදිරිපස (Front)</label>
+      <input type="file" accept="image/*">
+      <label>ජා.හැ.ප. පිටුපස (Back)</label>
+      <input type="file" accept="image/*">
+      <label>Selfie (මුහුණ)</label>
+      <input type="file" accept="image/*">
+      <button class="btn" onclick="prevStep(3)">ආපස්සට</button>
+      <button class="btn" onclick="nextStep(3)">ඊළඟ</button>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="form-step" id="step4">
+      <label>ගිණුම් හිමියාගේ නම</label>
+      <input type="text" placeholder="නම">
+      <label>ගිණුම් අංකය</label>
+      <input type="text" placeholder="123456789012">
+      <label>අයත් බැංකුව</label>
+      <input type="text" placeholder="බැංකුවේ නම">
+      <label>ශාඛාව</label>
+      <input type="text" placeholder="ශාඛාව">
+      <button class="btn" onclick="prevStep(4)">ආපස්සට</button>
+      <button class="btn" onclick="submitForm()">අවසන් කරන්න</button>
+      <p style="margin-top:20px; font-size:14px;">ගැටළුවක් ඇත්නම්: <strong>0712345678</strong> අමතන්න</p>
+    </div>
+  </div>
+
+  <script>
+    function nextStep(currentStep) {
+      const current = document.getElementById(`step${currentStep}`);
+      const next = document.getElementById(`step${currentStep + 1}`);
+      if (current && next) {
+        current.classList.remove("active");
+        next.classList.add("active");
+
+        document.getElementById(`stepCircle${currentStep}`).classList.remove("active");
+        document.getElementById(`stepCircle${currentStep}`).classList.add("done");
+        document.getElementById(`stepCircle${currentStep + 1}`).classList.add("active");
+
+        const progressText = document.getElementById("progressText");
+        if (currentStep === 1) progressText.innerText = "ලියාපදිංචිය 50% සම්පුර්ණයි";
+        if (currentStep === 2) progressText.innerText = "ලියාපදිංචිය 75% සම්පුර්ණයි";
+        if (currentStep === 3) progressText.innerText = "ලියාපදිංචිය 100% සම්පුර්ණයි";
+      }
+    }
+
+    function submitForm() {
+      alert("ඔබගේ විස්තර සාර්ථකව භාර ගන්නා ලදී!");
+    }
+  
+    function prevStep(currentStep) {
+      const current = document.getElementById(`step${currentStep}`);
+      const prev = document.getElementById(`step${currentStep - 1}`);
+      if (current && prev) {
+        current.classList.remove("active");
+        prev.classList.add("active");
+
+        document.getElementById(`stepCircle${currentStep}`).classList.remove("active");
+        document.getElementById(`stepCircle${currentStep - 1}`).classList.remove("done");
+        document.getElementById(`stepCircle${currentStep - 1}`).classList.add("active");
+
+        const progressText = document.getElementById("progressText");
+        if (currentStep === 2) progressText.innerText = "ලියාපදිංචිය 25% සම්පුර්ණයි";
+        if (currentStep === 3) progressText.innerText = "ලියාපදිංචිය 50% සම්පුර්ණයි";
+        if (currentStep === 4) progressText.innerText = "ලියාපදිංචිය 75% සම්පුර්ණයි";
+      }
+    }
+    </script>
+</body>
+</html>
